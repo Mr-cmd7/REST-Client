@@ -5,30 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:REST_Client.Windows"
         mc:Ignorable="d"
-        Title="Тарифы" Height="450" Width="900" Closed="Window_Closed">
+        Title="TariffWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="64*"/>
-            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="TariffList" Grid.Column="0"
-      Margin="10,10,10,10" FontSize="20">
+        <ListView x:Name="ListPrice" Grid.Column="0"
+        Margin="10,10,10,10" FontSize="20" SelectionChanged="ListTariff_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=Id}" Width="50"/>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Path=DepartureCode}" Width="100"/>
-                            <TextBlock Text="{Binding Path=DepartureName}" Width="300"/>
-                            <TextBlock Text="{Binding Path=PricePerWeightUnit}" Width="100"/>
-                        </StackPanel>
+                        <TextBlock Text="{Binding Path=Id}" Width="50" 
+                               Visibility="Hidden"/>
+                        <TextBlock Text="{Binding Path=DepartureCode}" Width="50"/>
+                        <TextBlock Text="{Binding Path=DepartureName}" Width="100"/>
+                        <TextBlock Text="{Binding Path=PricePerWeightUnit}" Width="100"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Изменить" Click="MenuItem_Click" />
-                    <MenuItem Header="Удалить"/>
+                    <MenuItem Header="Редактировать" Click="MenuItem_Click" ></MenuItem>
+                    <MenuItem Header="Удалить" Click="MenuItem_Click_1"></MenuItem>
                 </ContextMenu>
             </ListView.ContextMenu>
         </ListView>
@@ -36,11 +35,26 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Content="Sales" Grid.Row="0" 
-                Margin="30 80" Click="Button_Click"/>
-            <Button Content="PriceList" Grid.Row="1" 
-                Margin="30 80"/>
+            <StackPanel Orientation="Vertical" Grid.Row="0">
+                <Label Content="Введите код отправления"/>
+                <TextBox Name="DepartureCode" Height="40" FontSize="20"
+                     Margin="10 10"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="1">
+                <Label Content="Введите название отправления"/>
+                <TextBox Name="DepartureName" Height="40" FontSize="20"
+          Margin="10 10"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="2">
+                <Label Content="Введите цену"/>
+                <TextBox Name="PricePerWeightUnit" Height="40" FontSize="20"
+          Margin="10 10"/>
+            </StackPanel>
+            <Button Content="Сохранить" Grid.Row="3"
+                Margin="20 30" Click="Button_Click"/>
         </Grid>
     </Grid>
 </Window>

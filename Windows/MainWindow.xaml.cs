@@ -38,7 +38,7 @@ namespace REST_Client
             if (resp != null)
             {
                 TariffWindow tariffs = new TariffWindow(resp, this);
-                tariffs.Show();
+                tariffs.Show(); 
                 Hide();
             }
 
